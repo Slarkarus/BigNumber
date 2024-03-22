@@ -4,7 +4,9 @@
 #include <string>
 
 namespace BigNum{
-
+    long long max(long long a, long long b){
+        return a < b ? b : a;
+    }
 
     class BigNumber{
     private:
@@ -20,10 +22,7 @@ namespace BigNum{
             }
         }
 
-        BigNumber sum(const BigNumber &x, const BigNumber &y);
-        BigNumber dif(const BigNumber &x, const BigNumber &y);
-        BigNumber mul(const BigNumber &x, const BigNumber &y);
-        BigNumber div(const BigNumber &x, const BigNumber &y);
+
 
         bool first_greater_then_second(const BigNumber &x, const BigNumber &y);
         bool first_greater_then_second(const std::string &x, const std::string &y);
@@ -32,10 +31,21 @@ namespace BigNum{
 
         std::string normalize_precision(std::string data, long long p1, long long p2);
 
+        void ready_to_compare(std::string &data1, std::string &data2){
+            while(data1.size() < data2.size()){
+                data1 +='0';
+            }
+        }
+
         BigNumber(const std::string &data, long long pos, bool sign){
 
         }
     public:
+        BigNumber sum(const BigNumber &x, const BigNumber &y);
+        BigNumber dif(const BigNumber &x, const BigNumber &y);
+        BigNumber mul(const BigNumber &x, const BigNumber &y);
+        BigNumber div(const BigNumber &x, const BigNumber &y);
+
         explicit BigNumber(const std::string &number);
         explicit BigNumber(long long point_pos);
 
@@ -47,19 +57,8 @@ namespace BigNum{
         friend BigNumber operator/(BigNumber x, const BigNumber &y);
 
         friend bool operator==(BigNumber x, const BigNumber &y);
-        friend bool operator>(BigNumber x, const BigNumber &y);
+        friend bool operator!=(BigNumber x, const BigNumber &y);
         friend bool operator<(BigNumber x, const BigNumber &y);
-        friend bool operator>=(BigNumber x, const BigNumber &y);
-        friend bool operator<=(BigNumber x, const BigNumber &y);
-
-        BigNumber& operator=(const BigNumber &x);
-        BigNumber& operator+=(const BigNumber &x);
-        BigNumber& operator-=(const BigNumber &x);
-        BigNumber& operator*=(const BigNumber &x);
-        BigNumber& operator/=(const BigNumber &x);
-
-        BigNumber& operator++(int);
-        BigNumber& operator--(int);
     };
 
     BigNumber calc_pi(unsigned precision);

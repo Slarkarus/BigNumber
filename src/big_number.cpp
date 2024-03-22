@@ -2,9 +2,17 @@
 
 #include <iostream>
 #include <string.h>
-#include <algorithm>
 
 namespace BigNum{
+
+    std::string BigNumber::normalize_precision(std::string data, long long p1, long long p2){
+        while(p1 < p2){
+            data+= "0";
+            p1++;
+        }
+        return data;
+    }
+
     std::string BigNumber::sum(std::string x, std::string y) {
         x="0"+x;
         y="0"+y;
@@ -38,6 +46,7 @@ namespace BigNum{
             std::string d2 = normalize_precision(x.data, x.point_pos, max(x.point_pos, y.point_pos));
             return BigNumber(sum(d1, d2), x.point_pos, x.sign);
         }
+        if()
     }
 
     //BigNumber BigNumber::dif(const BigNumber &x, const BigNumber &y) {}
@@ -109,9 +118,15 @@ namespace BigNum{
         return result;
     }
 
+    BigNumber operator+(BigNumber x, const BigNumber &y) {
+        return BigNumber(__cxx11::basic_string());
+    }
 
 
-    //BigNumber operator+(const BigNumber &x, const BigNumber &y) {return sum(x,y);}
+
+    BigNumber operator+(const BigNumber &x, const BigNumber &y){
+        return sum(x,y);
+    }
 
     //BigNumber operator-(BigNumber x, const BigNumber &y) {return BigNumber(__cxx11::basic_string());}
 
@@ -119,7 +134,9 @@ namespace BigNum{
 
     //BigNumber operator/(BigNumber x, const BigNumber &y) {return BigNumber(__cxx11::basic_string());}
 
-    //bool operator==(BigNumber x, const BigNumber &y) {return false;}
+    bool operator==(BigNumber x, const BigNumber &y){
+        return x.data == y.data && x.point_pos == y.point_pos && x.sign == y.sign;
+    }
 
     //bool operator>(BigNumber x, const BigNumber &y) {return false;}
 

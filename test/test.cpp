@@ -13,7 +13,7 @@ TEST(TestBigNumber, StringTest){
 }
 
 TEST(TestBigNumber, SumTest){
-    BigNum::BigNumber x("1255.987");
-    BigNum::BigNumber y("94583.1523");
-    std::cout << x+y;
+    BigNum::BigNumber x("0.08");
+    BigNum::BigNumber y("0.02");
+    std::cout << (x+y).to_string();
 }
