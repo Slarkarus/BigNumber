@@ -48,7 +48,7 @@ BigNumber calc_pi(unsigned precision){
     two = "2"_b;
     three = "3"_b;
     four = "4"_b;
-    return two  * (calc_atan(one/two, precision) + calc_atan(one/three, precision));
+    return four  * (calc_atan(one/two, precision) + calc_atan(one/three, precision));
 }
 
 int main(){
