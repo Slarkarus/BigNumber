@@ -42,13 +42,13 @@ BigNumber calc_atan(const BigNumber x, unsigned precision){
 }
 
 BigNumber calc_pi(unsigned precision){
-    precision +=20;
+    precision +=10;
     BigNumber one(precision), two(precision), three(precision), four(precision);
     one = "1"_b;
     two = "2"_b;
     three = "3"_b;
     four = "4"_b;
-    return four  * (calc_atan(one/two, precision) + calc_atan(one/three, precision));
+    return two  * (calc_atan(one/two, precision) + calc_atan(one/three, precision));
 }
 
 int main(){
@@ -57,7 +57,7 @@ int main(){
 
     clock_t time;
     time = clock();
-    calc_pi(precision);
+    std::cout << calc_pi(precision).to_string();
 
     time = clock() - time;
     std::cout <<  "It took me " << ((float)time)/CLOCKS_PER_SEC << " seconds\n";
