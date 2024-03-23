@@ -3,66 +3,80 @@
 
 #include <string>
 
-namespace BigNum{
-    long long max(long long a, long long b){
-        return a < b ? b : a;
-    }
+namespace BigNum {
+    long long max(long long a, long long b);
 
-    class BigNumber{
+    long long min(long long a, long long b);
+
+    class BigNumber {
     private:
         bool sign;
-        std::string data;
+        std::string data_1; // data before point
+        std::string data_2; // data after point
         long long point_pos;
 
-        std::string sum(std::string x, std::string y);
+        static std::string sum(std::string x, std::string y); // v2
+        static std::string diff(std::string x, std::string y); // v2
+        static std::string mul(const std::string &x, const std::string &y);
 
-        std::string diff(const std::string &x, const std::string &y){
-            if(x<y){
-                return diff(y, x);
-            }
-        }
+        static std::string div(std::string x, std::string y);
 
+        static std::string div2(std::string x);
 
-
-        bool first_greater_then_second(const BigNumber &x, const BigNumber &y);
-        bool first_greater_then_second(const std::string &x, const std::string &y);
         //char to int
-        int ctoi(const char &x);
+        static int ctoi(const char &x); // v2
 
-        std::string normalize_precision(std::string data, long long p1, long long p2);
+        // normalize precision
+        static void norm_prec(std::string &data, long long p1, long long p2);
 
-        void ready_to_compare(std::string &data1, std::string &data2){
-            while(data1.size() < data2.size()){
-                data1 +='0';
-            }
-        }
+        static void add_left_zeros(std::string &data_1, std::string &data_2);
 
-        BigNumber(const std::string &data, long long pos, bool sign){
+        static bool a_less_than_b(const std::string &a, const std::string &b);
 
-        }
+        void fix_negative_zero();
+
+        static BigNumber sum(BigNumber x, BigNumber y);
+
+        static BigNumber diff(BigNumber x, BigNumber y);
+
+        static BigNumber mul(BigNumber x, BigNumber y);
+
+        static BigNumber div(BigNumber x, BigNumber y);
+
     public:
-        BigNumber sum(const BigNumber &x, const BigNumber &y);
-        BigNumber dif(const BigNumber &x, const BigNumber &y);
-        BigNumber mul(const BigNumber &x, const BigNumber &y);
-        BigNumber div(const BigNumber &x, const BigNumber &y);
 
-        explicit BigNumber(const std::string &number);
-        explicit BigNumber(long long point_pos);
 
-        std::string to_string();
+        explicit BigNumber(const std::string &number); // v2
+        explicit BigNumber(long long point_pos); // v2
+        BigNumber &operator=(const BigNumber &x);
 
-        friend BigNumber operator+(BigNumber x, const BigNumber &y);
-        friend BigNumber operator-(BigNumber x, const BigNumber &y);
-        friend BigNumber operator*(BigNumber x, const BigNumber &y);
-        friend BigNumber operator/(BigNumber x, const BigNumber &y);
+        std::string to_string(); // v2
+        bool is_zero();
 
-        friend bool operator==(BigNumber x, const BigNumber &y);
-        friend bool operator!=(BigNumber x, const BigNumber &y);
-        friend bool operator<(BigNumber x, const BigNumber &y);
+        BigNumber operator+(BigNumber x);
+
+        BigNumber operator-(BigNumber x);
+
+        BigNumber operator*(BigNumber x);
+
+        BigNumber operator/(BigNumber x);
+
+        BigNumber operator-();
+
+        friend bool operator==(const BigNumber &x, const BigNumber &y);
+
+        friend bool operator!=(const BigNumber &x, const BigNumber &y);
+
+        friend bool operator<(const BigNumber &x, const BigNumber &y);
+
+        friend bool operator>(const BigNumber &x, const BigNumber &y);
+
+
     };
 
-    BigNumber calc_pi(unsigned precision);
-    //BigNumber operator "" _42(std::string);
+
+    BigNumber operator "" _b(const char *str, size_t size);
+
 }
 
 #endif //LIB_BIG_NUMBER_H
