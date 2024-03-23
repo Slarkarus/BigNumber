@@ -25,11 +25,9 @@ BigNumber calc_atan(const BigNumber x, unsigned precision){
 
     BigNumber tmp(precision);
     tmp = x;
-    std::cout << tmp.to_string() << '\n';
-    std::cout << down.to_string() << '\n';
+
     int count = 0;
     while(tmp > down){
-        std::cout << count << '\n';
         tmp = numerator / denominator;
         if(count%2==0) {
             result = result + tmp;
