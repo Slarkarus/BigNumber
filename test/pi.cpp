@@ -9,8 +9,6 @@ using  namespace BigNum;
 
 BigNumber calc_atan(const BigNumber x, unsigned precision){
     BigNumber result(precision);
-    result = x;
-    result = result-x;
     std::string small = "1";
     for(int i=0; i<precision; ++i){
         small = "0"+small;
